@@ -1,6 +1,8 @@
 package Models;
 import Exceptions.InsufficientFundsException;
+import Exceptions.OutOfStockException;
 import MyInterfaces.CustomerInterface;
+import Exceptions.PurchaseUnsuccessfulException;
 
 public class Customer extends Person implements CustomerInterface {
 
@@ -43,33 +45,36 @@ public class Customer extends Person implements CustomerInterface {
     }
 
     @Override
-    public String customerToBuy(Customer customer, String productName, int productQuantity, UpdatedProductCatalogue catalogue, Cashier cashier) {
+    public String customerToBuy(String productName, int productQuantity, double productPrice, Double walletBalance, UpdatedProductCatalogue catalogue) {
         String result = "";
        Product product = new Product();
     for (Product element: catalogue.getProductList()){
         if(element.getProductName().equals(productName)){
             product = element;
         }
-    }
-    if(productQuantity <= product.getUnitsInStock() && canBuy(product, productQuantity)){
-        walletBalance -= productQuantity * product.getProductPrice();
-        cashier.issuesSalesReceipts(customer, product, productQuantity);
-        result = "Purchase Successful";
-    }
-    if(productQuantity > product.getUnitsInStock()){
-            result = "Out Of Stock!";
-    }
-    return result;
-    }
+        if(productQuantity > product.getUnitsInStock()) {
+            throw new OutOfStockException("Out Of Stock!");
+        }
+        if(productQuantity <= product.getUnitsInStock() && walletBalance > productQuantity * product.getProductPrice() ){
+                result = "Purchase Successful";
+        }
+        else {
+                throw new PurchaseUnsuccessfulException("Transaction is not successful");
 
-    public boolean canBuy(Product product, int quantity){
-        if (walletBalance >= product.getProductPrice() * quantity){
-            return true;
-        }else{
-            throw new InsufficientFundsException("Insufficient Funds");
         }
     }
 
+    return result;
+    }
+
+//    public boolean canBuy(Product product, int quantity, double ){
+//        if (walletBalance >= product.getProductPrice() * quantity){
+//            return true;
+//        }else{
+//            throw new InsufficientFundsException("Insufficient Funds");
+//        }
+//    }
+//
 }
 
 

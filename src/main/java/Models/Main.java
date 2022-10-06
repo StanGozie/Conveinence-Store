@@ -35,25 +35,20 @@ public class Main {
         UpdatedProductCatalogue catalogue1 = new UpdatedProductCatalogue();
         catalogue1.addToProductList(path);
         System.out.println(catalogue1.getProductList());
-
+        Product product = new Product();
+        product.setProductName("SMA Gold");
 
         Customer customer = new Customer();
+        customer.setFirstName("Chisom");
+        customer.setLastName("Chigozie");
         customer.setWalletBalance(10000.0);
-        System.out.println(customer.customerToBuy(customer,"SMA Gold", 2, catalogue1, cashier));
-
-        Product product = new Product();
-
+        //System.out.println(customer.customerToBuy("SMA Gold", 2, 350.00, ));
+        System.out.println(cashier.issuesSalesReceipts(customer,product,2));
 
 
 
 
-//        product.setProductCategory("Electronics");
-//        product.setProductName("Finger Battery");
-//        product.setProductId("EL/0");
-//        product.setProductPrice(35000.00);
-//        product.setUnitsInStock(1);
-//        System.out.println(" ");
-//        System.out.println(" ");
+
 
 
     }

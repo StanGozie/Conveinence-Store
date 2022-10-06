@@ -6,6 +6,6 @@ import Models.UpdatedProductCatalogue;
 
 public interface CustomerInterface {
 
-    public String customerToBuy(Customer customer, String productName, int productQuantity, UpdatedProductCatalogue catalogue, Cashier cashier);
+    public String customerToBuy(String productName, int productQuantity, double productPrice, Double walletBalance, UpdatedProductCatalogue catalogue);
 
 }
