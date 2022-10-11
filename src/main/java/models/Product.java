@@ -1,4 +1,8 @@
-package Models;
+package models;
+
+import interfaces.ProductService;
+
+import java.util.ArrayList;
 
 public class Product {
 
@@ -71,5 +75,6 @@ public class Product {
                 ", unitsInStock=" + unitsInStock +
                 '}';
     }
+
 }
 

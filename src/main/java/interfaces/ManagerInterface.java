@@ -1,6 +1,6 @@
-package MyInterfaces;
+package interfaces;
 
-import Models.Applicant;
+import models.Applicant;
 
 public interface ManagerInterface {
 

@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-import MyInterfaces.ApplicantInterface;
+import interfaces.ApplicantInterface;
 
 public class Applicant extends Person implements ApplicantInterface{
 

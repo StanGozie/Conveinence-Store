@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-import MyInterfaces.ManagerInterface;
+import interfaces.ManagerInterface;
 
 public class Manager extends Staff implements ManagerInterface {
 

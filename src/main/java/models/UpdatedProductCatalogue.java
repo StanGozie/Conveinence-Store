@@ -1,19 +1,21 @@
-package Models;
+package models;
+
+import interfaces.ProductService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UpdatedProductCatalogue {
-private ArrayList<Product> productList = new ArrayList<>();
+public class UpdatedProductCatalogue implements ProductService {
+    private ArrayList<Product> productList = new ArrayList<>();
 
-    public UpdatedProductCatalogue(ArrayList<Product> productList) {
-        this.productList = productList;
-    }
+//    public UpdatedProductCatalogue(ArrayList<Product> productList) {
+//        this.productList = productList;
+//    }
 
-    public UpdatedProductCatalogue() {
-    }
+//    public UpdatedProductCatalogue() {
+//    }
 
     public ArrayList<Product> getProductList() {
         return productList;
@@ -23,6 +25,7 @@ private ArrayList<Product> productList = new ArrayList<>();
         this.productList = productList;
     }
 
+
     @Override
     public String toString() {
         return "UpdatedProductCatalogue{" +
@@ -30,7 +33,7 @@ private ArrayList<Product> productList = new ArrayList<>();
                 '}';
     }
 
-    public void addToProductList(String path){
+    public void readProductListFromCsv(String path){
 
         ArrayList<Product> listOfProducts = getProductList();
         String line1 = null;
@@ -49,6 +52,27 @@ private ArrayList<Product> productList = new ArrayList<>();
         }  catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public ArrayList<Product> fetchProductList(){
+        return productList;
+    }
+
+
+
+    @Override
+    public String readProductsFromCsvFile(String path) {
+
+        String line = " ";
+        StringBuilder builder = new StringBuilder();
+        try(FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);){
+            while(( line = br.readLine()) != null){
+                builder.append(line).append("\r");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return builder.toString();
     }
 
 
